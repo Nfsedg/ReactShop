@@ -23,48 +23,46 @@ module.exports = {
         }
     },
     module: {
-        // ... Lista de reglas respecto a los loaders	
-        rules: [
-            // Reglas para babel
-            // Expresiones regulares
-            {
-                test: /\.js$|jsx/,
-                use: { loader: 'babel-loader'},
-                exclude: /node_modules/
-            },
-            // Reglas para HTML loader
-            {
-                test: /\.html$/,
-                use: [{ loader: 'html-loader'}]
-           },
-           {
-               test: /\.(css|scss)$/,
-               use: [
-                "style-loader",
-                "css-loader",
-                "sass-loader"
-               ]
-           },
-           {
-               test: /\.(png|svg|jpg|gif)$/,
-               type: 'asset'
-           }
-        ]
-
-    },
-    plugins: [
-	    //... Configuración de plugins
-        new HtmlWebpackPlugin(
-		{ 
-      		template: './public/index.html', 
-		    filename: './index.html'   
-		},
-        new MiniCssExtractPlugin({
-            filename: '[name].css'
-        })
-	)
+		rules: [
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader'
+				}
+			},
+			{
+				test: /\.html$/,
+				use: [
+					{
+						loader: 'html-loader'
+					}
+				]
+			},
+			{
+				test: /\.(css|scss)$/,
+				use: [
+					"style-loader",
+					"css-loader",
+					"sass-loader",
+				],
+			},
+			{
+				test: /\.(png|svg|jpg|gif)$/,
+				type: 'asset'
+			}
+		]
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: './public/index.html',
+			filename: './index.html'
+		}),
+		new MiniCssExtractPlugin({
+			filename: '[name].css'
+		}),
 	],
-    devServer: {
-        historyApiFallback: true,
-    }
+	devServer: {
+		historyApiFallback: true,
+	}
 }
